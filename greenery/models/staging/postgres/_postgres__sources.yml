@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+
+  - name: postgres
+    schema: public
+    database: raw
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    tables:
+      - name: addresses
+        description: >
+          Containts addresses on Greenery platform
+
+      - name: events
+        description: >
+          Containts events recorded on Greenery platform
+
+      - name: orders
+        description: >
+          Contains order on Greenery platform
+
+      - name: order_items
+        description: >
+          Containts items within each order on Greenery platform
+
+      - name: products
+        description: >
+          Contains products available on Greenery platform
+
+      - name: promos
+        description: >
+          Contains promos available on Greenery platform
+
+      - name: users
+        description: >
+          Contains users on Greenery platform

@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: >
+      Containts addresses on Greenery platform
+
+  - name: stg_events
+    description: >
+      Containts events recorded on Greenery platform
+
+  - name: stg_orders
+    description: >
+      Contains order on Greenery platform
+
+  - name: stg_order_items
+    description: >
+      Containts items within each order on Greenery platform
+
+  - name: stg_products
+    description: >
+      Contains products available on Greenery platform
+
+  - name: stg_promos
+    description: >
+      Contains promos available on Greenery platform
+
+  - name: stg_users
+    description: >
+      Contains users on Greenery platform
