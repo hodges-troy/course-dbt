@@ -48,9 +48,26 @@ If I had more data, potential features I would look into:
 
 **3. Explain the product mart models you added. Why did you organize the models in the way you did?**
 
+I created two fact tables related to page views:
+- fact_page_views
+- fact_page_views_daily
+
+In fact_page_views, I filtered the events table to page views, and removed unneeded columns.
+In fact_page_views_daily, I calculate daily views for each page.
+
+I organized these separately so Product team members can have easy access to both the granular page view event data if they want to drill deeply into page view data, and daily metrics around page views for tracking trends.
+
+If I were to continue building out, I may add more separate models for different product related events or metrics.
+
 **4. Explain the core mart models you added. Why did you organize the models in the way you did?**
 
-**5. Explain the marketing mart models you added. Why did you organize the models in the way you did?**
+I created one dim table, dim_orders, in the core mart. This table joins in information about product IDs and quantities in each order to the raw orders table.
+
+I created this table in core, as many business groups may want to leverage information about orders.
+
+**5. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense**
+
+![Alt text](image-1.png)
 
 ## Part 2.Tests
 

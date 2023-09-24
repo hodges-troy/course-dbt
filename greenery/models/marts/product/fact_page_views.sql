@@ -5,12 +5,15 @@
 }}
 
 SELECT 
-    EVENT_ID,
-    SESSION_ID,
-    USER_ID,
-    PAGE_URL,
-    CREATED_AT,
-    EVENT_TYPE,
-    PRODUCT_ID
-FROM {{ ref('stg_events') }}
-WHERE EVENT_TYPE = 'page_view'
+    events.EVENT_ID,
+    events.SESSION_ID,
+    events.USER_ID,
+    events.PAGE_URL,
+    events.CREATED_AT,
+    events.EVENT_TYPE,
+    events.PRODUCT_ID,
+    products.NAME
+FROM {{ ref('stg_events') }} AS events
+JOIN (SELECT DISTINCT NAME, PRODUCT_ID FROM {{ ref('stg_products') }}) AS products
+USING (PRODUCT_ID)
+WHERE events.EVENT_TYPE = 'page_view'
