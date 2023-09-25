@@ -4,27 +4,84 @@ models:
   - name: stg_addresses
     description: >
       Containts addresses on Greenery platform
+    columns:
+      - name: address_id
+        tests:
+          - not_null
+          - unique
+      - name: address
+        tests:
+          - not_null
+          - unique
+      - name: zipcode
+        tests:
+          - not_null
+      - name: country
+        tests:
+          - not_null
 
   - name: stg_events
     description: >
       Containts events recorded on Greenery platform
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        tests:
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
 
   - name: stg_orders
     description: >
       Contains order on Greenery platform
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: address_id
+        tests:
+          - relationships:
+              to: ref('stg_addresses')
+              field: address_id
 
   - name: stg_order_items
     description: >
       Containts items within each order on Greenery platform
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
 
   - name: stg_products
     description: >
       Contains products available on Greenery platform
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
 
   - name: stg_promos
     description: >
       Contains promos available on Greenery platform
+    columns:
+      - name: promo_id
+        tests:
+          - not_null
+          - unique
 
   - name: stg_users
     description: >
       Contains users on Greenery platform
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
