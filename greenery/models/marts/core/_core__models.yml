@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: dim_orders
+    description: Dimension table with information on orders, including products in orders.
+    columns:
+    - name: order_id
+      tests:
+        - not_null
+        - unique
+    - name: product_id
+      tests:
+        - not_null
+    - name: product_quantity
+      tests:
+        - not_null

@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: fact_page_views
+    description: Information on all page views on Greenery platform 
+    columns:
+    - name: event_id
+      tests:
+        - not_null
+        - unique
+    - name: session_id
+      tests:
+        - not_null
+    - name: event_type
+      tests:
+      - accepted_values:
+          values: ['page_view']
+  - name: fact_page_views_daily
+    description: Daily page views by product ID
+    columns:
+    - name: product_id
+      tests:
+        - not_null
+    - name: name
+      tests:
+        - not_null
+    - name: page_views
+      tests:
+        - positive_values
