@@ -1,6 +1,6 @@
 ## Week Two Project Questions
 
-### Part 1.Models
+### Part 1. Models
 
 **1. What is our user repeat rate?
 
@@ -69,7 +69,43 @@ I created this table in core, as many business groups may want to leverage infor
 
 ![Alt text](image-1.png)
 
-## Part 2.Tests
+## Part 2. Tests
+
+**1.What assumptions are you making about each model? (i.e. why are you adding each test?)**
+
+For my staging models, I added checks to make sure every primary key has no nulls and is unique. This is because otherwise, our tables do not have properly defined primary keys and can result in all types of problems for downstream users who are counting on the primary key representing unique observations in the dataset!
+
+As well, I added a few relationship tests to make sure tables referencing an ID from the "source of truth" table were using valid ID:
+- test that 'stg_events' uses `user_id` values that are found in 'stg_users'
+- test that 'stg_orders' uses `address_id` values that are found in 'stg_addresses'
+- test that 'stg_order_items' uses `order_id` values that are found in 'stg_orders'
+
+I also added one singluar test for model 'stg_orders' to test that for orders that have been delivered, the delivery date is after the order creation date.
+
+For my new dimension and fact tables, I also checked for non-null and unique primary keys. I used the 'dbt_utils_unique_combination_of_columns' test
+on the 'fact_page_views_daily' model to test the unique combinatio of two models that make up the primary key.
+
+As well, I tested that 'fact_page_views_daily' only has positive numbers of views recorded.
+
+**2. Did you find any “bad” data as you added and ran tests on your models? How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?**
+
+All my tests passed without needing to make any changes to how the data is processed. Given the leading nature of this question, I imagine there may be some "bad" data lurking that more rigorous tests would find!
 
 
+## Part 3. dbt snapshots
 
+The following `product_id`s had changing values:
+
+4cda01b9-62e2-46c5-830f-b7f262a58fb1
+55c6a062-5f4a-4a8b-a8e5-05ea5e6715a3
+be49171b-9f72-4fc9-bf7a-9a52e259836b
+fb0e8be7-5ac4-4a76-a1fa-2cc4bf0b2d80
+
+Found using this query:
+```
+SELECT DISTINCT PRODUCT_ID
+FROM DEV_DB.DBT_TJHODGES12GMAILCOM.PRODUCTS_SNAPSHOT
+WHERE DBT_VALID_TO IS NOT NULL
+```
+
+NOTE: This query will work this time where we've only had one change of data, but I'll need to update it for future times when we've had multiple changes per product id.

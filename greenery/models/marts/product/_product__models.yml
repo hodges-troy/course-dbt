@@ -15,8 +15,14 @@ models:
       tests:
       - accepted_values:
           values: ['page_view']
+  
   - name: fact_page_views_daily
     description: Daily page views by product ID
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - product_id
+            - view_date
     columns:
     - name: product_id
       tests:
