@@ -1,0 +1,10 @@
+version: 2
+
+macros:
+  - name: value_counts
+    description: Count occurences of each unique value in column in table
+    arguments:
+      - name: table
+        description: table to look for column in
+      - name: column
+        description: name of column to look for unique values
