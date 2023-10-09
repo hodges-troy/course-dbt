@@ -33,3 +33,14 @@ models:
     - name: page_views
       tests:
         - positive_values
+
+  - name: fact_conversion_rate
+    description: Total conversion rate across all Greenery products
+    columns:
+    - name: sessions_with_checkouts
+      tests:
+        - not_null
+    - name: total_sessions
+      tests:
+        - not_null
+    - name: total_conversion_rate
