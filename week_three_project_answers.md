@@ -30,7 +30,12 @@ CROSS JOIN sessions s
 
 Did not get to.
 
-
 ## Part 2. Add Macro
 
+I added a macro "value_counts" to count the occurences of unique values in a given column in a given table.
 
+I created the model `fact_event_types_per_session.sql` in the Product Mart to test that it was working.
+
+## Part 3-6
+
+Did not get to.
